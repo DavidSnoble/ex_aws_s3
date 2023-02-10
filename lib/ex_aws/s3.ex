@@ -825,7 +825,7 @@ defmodule ExAws.S3 do
   @spec head_object(bucket :: binary, object :: binary) :: ExAws.Operation.S3.t()
   @spec head_object(bucket :: binary, object :: binary, opts :: head_object_opts) ::
           ExAws.Operation.S3.t()
-  @request_headers [:range, :if_modified_since, :if_unmodified_since, :if_match, :if_none_match, :x_amz_checksum_mode]
+          @request_headers [:range, :if_modified_since, :if_unmodified_since, :if_match, :if_none_match, :x_amz_checksum_mode, :checksum_mode]
   def head_object(bucket, object, opts \\ []) do
     opts = opts |> Map.new()
     @request_headsers |> IO.inspect(label: "DEBUG THIS REQUEST HEADER")
@@ -843,7 +843,6 @@ defmodule ExAws.S3 do
     params = format_and_take(opts, [:version_id])|> IO.inspect(label: "DEBUG")
     request(:head, bucket, object, headers: headers, params: params)
   end
-
   @doc "Determine the CORS configuration for an object"
   @spec options_object(
           bucket :: binary,
